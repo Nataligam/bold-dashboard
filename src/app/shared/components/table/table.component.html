@@ -1,1 +1,44 @@
-<p>table works!</p>
+
+<p-table
+    #dt1
+    class="custom-table"
+    [value]="filteredData"
+    [columns]="cols"
+    dataKey="id"
+    [rows]="rows"
+    [rowsPerPageOptions]="rowsPerPage"    
+    [paginator]="true"
+>
+    <ng-template pTemplate="caption">
+        <div class="title-table-caption">{{titleCaption}}</div>
+            <span class="p-input-icon-left w-full">
+                <i class="pi pi-search"></i>
+                <input pInputText class="border-noround w-full" type="text" [(ngModel)]="searchValue" (input)="filterData()" placeholder="Buscar" />
+            </span>     
+    </ng-template>
+    <ng-template pTemplate="header" let-columns>
+        <tr>
+            <th *ngFor="let col of columns">
+                {{ col.header }}
+            </th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-rowData let-columns="columns">
+        <tr>
+            <td *ngFor="let col of columns">
+                <ng-container *ngIf="col.isCustom; else defaultTemplate">
+                    <ng-container *ngTemplateOutlet="col.templateRef; context: { $implicit: rowData }"></ng-container>             
+                </ng-container>
+                    
+                <ng-template #defaultTemplate>
+                    {{ rowData[col.field] }}
+                </ng-template>
+            </td>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="emptymessage">
+        <tr>
+            <td colspan="8">No customers found.</td>
+        </tr>
+    </ng-template>
+</p-table>

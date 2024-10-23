@@ -1,1 +1,13 @@
-<p>navbar works!</p>
+
+<p-menubar>
+    <ng-template pTemplate="start">
+      <img src="assets/logo.png" alt="Logo" height="40">
+    </ng-template>
+  
+    <ng-template pTemplate="end">
+        <div class="flex align-items-center gap-4">
+            <a routerLink="/" class="p-menuitem-link">Mi negocio</a>
+            <a routerLink="/" class="p-menuitem-link">Ayuda (?)</a>
+        </div>
+    </ng-template>
+  </p-menubar>
