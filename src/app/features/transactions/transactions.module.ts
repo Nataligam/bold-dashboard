@@ -9,13 +9,13 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { TransactionsService } from './services/transactions.service';
 
 @NgModule({
-  declarations: [
-    DashboardComponent,
+  declarations: [    
   ],
   imports: [
     TransactionsRoutingModule,
     TransactionsTableComponent,
     InfoCardComponent,
+    DashboardComponent,
     TableComponent
 ],
 providers: [TransactionsService]

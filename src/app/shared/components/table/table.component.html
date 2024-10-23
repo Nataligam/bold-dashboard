@@ -2,7 +2,7 @@
 <p-table
     #dt1
     class="custom-table"
-    [value]="filteredData"
+    [value]="data | customFilter: searchValue"
     [columns]="cols"
     dataKey="id"
     [rows]="rows"
@@ -13,7 +13,7 @@
         <div class="title-table-caption">{{titleCaption}}</div>
             <span class="p-input-icon-left w-full">
                 <i class="pi pi-search"></i>
-                <input pInputText class="border-noround w-full" type="text" [(ngModel)]="searchValue" (input)="filterData()" placeholder="Buscar" />
+                <input pInputText class="border-noround w-full" type="text" [(ngModel)]="searchValue" placeholder="Buscar" />
             </span>     
     </ng-template>
     <ng-template pTemplate="header" let-columns>

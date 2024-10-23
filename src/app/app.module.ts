@@ -1,13 +1,12 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
+import { HttpClientModule } from '@angular/common/http';
+import { provideAnimations } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { NavbarComponent } from "./shared/components/navbar/navbar.component";
 import { LayoutComponent } from './shared/components/layout/layout.component';
-import { MenubarModule } from 'primeng/menubar';
-import { HttpClientModule } from '@angular/common/http';
-import { CustomFilterPipe } from './shared/pipes/custom-filter.pipe';
+import { NavbarComponent } from "./shared/components/navbar/navbar.component";
 
 @NgModule({
   declarations: [
@@ -20,7 +19,7 @@ import { CustomFilterPipe } from './shared/pipes/custom-filter.pipe';
     LayoutComponent,
     HttpClientModule
 ],
-  providers: [],
+  providers: [provideAnimations()],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

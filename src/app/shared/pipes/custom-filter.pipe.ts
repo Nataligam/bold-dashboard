@@ -8,12 +8,10 @@ import { Transaction } from 'src/app/core/models/transactions/transaction.model'
 export class CustomFilterPipe implements PipeTransform {
 
   transform(transactions: Transaction[], filterText: string): Transaction[] {
-    console.log('entro al transform')
     if (!transactions || !filterText) {
-      return transactions; // Si no hay transacciones o texto de filtro, retorna todas las transacciones
+      return transactions; 
     }
     const lowerCaseFilter = filterText.toLowerCase();
-    console.log(transactions)
 
     return transactions.filter(transaction =>
       transaction.id.toLowerCase().includes(lowerCaseFilter) ||

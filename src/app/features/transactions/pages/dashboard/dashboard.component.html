@@ -1,12 +1,42 @@
-<div class="flex flex-row justify-content-between">
-    <app-info-card></app-info-card>
-    <div class="flex flex-column justify-content-end">
-        <div>
-            <span>Hoy</span>
-            <span>Esta semana</span>
-            <span>Junio</span>
+<div class="grid justify-content-between">
+    <app-info-card class="col-12 md:col-4 lg:col-3" [tooltipText]="'Información'"
+        [titleCard]="'Tus ventas de '+selectedButton" [contentTemplate]="contentCard"></app-info-card>
+    <div class="col-12 md:col-8 lg:col-9">
+        <div class="button-filter-date-group">
+            <button [class.active]="selectedButton === 'Hoy'" (click)="selectButton('Hoy')">Hoy</button>
+            <button [class.active]="selectedButton === 'Esta semana'" (click)="selectButton('Esta semana')">Esta
+                semana</button>
+            <button [class.active]="selectedButton === 'Junio'" (click)="selectButton('Junio')">Junio</button>
         </div>
-        <div>Filtros</div>
+        <div class="flex justify-content-end mt-3">
+            <p-multiSelect [appendTo]="'body'" (onChange)="selectFiltersMultiselect()" [options]="options" [showToggleAll]="false" [showHeader]="false" [filter]="false" [(ngModel)]="selectedOptions" placeholder="Filtrar"
+                optionLabel="name">     
+                <ng-template let-value pTemplate="selectedItems">
+                    <div class="inline-flex align-items-center gap-2 px-1" *ngFor="let option of value">                       
+                        <div>{{ option.name }},</div>
+                    </div>
+                <div *ngIf="!value || value.length === 0">Filtrar</div>
+                </ng-template>        
+                <ng-template let-op pTemplate="item">
+                    <div class="flex align-items-center gap-2">                
+                        <div class="text-blue">{{ op.name }}</div>
+                    </div>
+                </ng-template>
+                <ng-template let-op pTemplate="footer">
+                    <div class="text-center p-2 flex">
+                       <p-button class="w-full custom-red-button" (click)="applyFilters()" [rounded]="true" label="Aplicar"></p-button>
+                    </div>
+                </ng-template>
+            </p-multiSelect>
+        </div>
     </div>
 </div>
-<app-transactions-table></app-transactions-table>
+<app-transactions-table #transactionsTable [titleCaption]="'Tus ventas de '+selectedButton"></app-transactions-table>
+
+
+<ng-template #contentCard>
+    <div class="text-center">
+        <p class="text-3xl m-0 font-semibold text-degrade">{{amountTotal | currency}}</p>
+        <p>{{selectedButton}}, 2024</p>
+    </div>
+</ng-template>

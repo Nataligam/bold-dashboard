@@ -1,1 +1,11 @@
-<p>info-card works!</p>
+<p-card class="custom-card">
+    <ng-template pTemplate="header" class="">
+        <div class="flex flex-row align-items-center text-white justify-content-between pl-3 pr-3">
+            <p>{{ titleCard }}</p>
+            <i class="pi pi-info-circle" [pTooltip]="tooltipText"
+                tooltipPosition="top"></i>
+        </div>
+
+    </ng-template>
+    <ng-container *ngIf="contentTemplate" [ngTemplateOutlet]="contentTemplate"></ng-container>
+</p-card>
