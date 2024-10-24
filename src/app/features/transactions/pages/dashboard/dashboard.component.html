@@ -1,1 +1,49 @@
-<app-transactions-table></app-transactions-table>
+<div class="grid justify-content-between">
+    <app-info-card class="col-12 md:col-4 lg:col-3" [tooltipText]="'Información'"
+        [titleCard]="'Tus ventas de '+selectedButton" [contentTemplate]="contentCard"></app-info-card>
+    <div class="col-12 md:col-8 lg:col-9">
+        <div class="button-filter-date-group grid">
+            <div class="col-12 md:col-4 lg:col-4 flex justify-content-center">
+              <p-button class="w-full font-medium" [ngClass]="{'active': selectedButton === 'Hoy'}" (click)="selectButton('Hoy')" label="Hoy"></p-button>
+            </div>
+            <div class="col-12 md:col-4 lg:col-4 flex justify-content-center">
+              <p-button class="w-full" [ngClass]="{'active': selectedButton === 'Esta semana'}" (click)="selectButton('Esta semana')" label="Esta semana"></p-button>
+            </div>
+            <div class="col-12 md:col-4 lg:col-4 flex justify-content-center">
+              <p-button class="w-full" [ngClass]="{'active': selectedButton === 'Junio'}" (click)="selectButton('Junio')" label="Junio"></p-button>
+            </div>
+          </div>
+        <div class="flex justify-content-end mt-3">
+            <p-multiSelect [appendTo]="'body'" (onChange)="selectFiltersMultiselect()" [options]="options" [showToggleAll]="false" [showHeader]="false" [filter]="false" [(ngModel)]="selectedOptions" placeholder="Filtrar"
+                optionLabel="name">     
+                <ng-template let-value pTemplate="selectedItems">
+                    <div class="inline-flex align-items-center gap-2 px-1" *ngFor="let option of value">                       
+                        <div>{{ option.name }},</div>
+                    </div>
+                <div *ngIf="!value || value.length === 0">Filtrar</div>
+                </ng-template>        
+                <ng-template let-op pTemplate="item">
+                    <div class="flex align-items-center gap-2">                
+                        <div class="text-blue">{{ op.name }}</div>
+                    </div>
+                </ng-template>
+                <ng-template let-op pTemplate="footer">
+                    <div class="text-center p-2 flex">
+                       <p-button class="w-full custom-red-button" (click)="applyFilters()" [rounded]="true" label="Aplicar"></p-button>
+                    </div>
+                </ng-template>
+            </p-multiSelect>
+        </div>
+    </div>
+</div>
+<app-transactions-table #transactionsTable [titleCaption]="'Tus ventas de '+selectedButton"></app-transactions-table>
+
+
+<ng-template #contentCard>
+    <div class="text-center">
+        <p class="text-3xl m-0 font-semibold text-degrade">{{amountTotal | currency}}</p>
+        <p>{{selectedButton}}, 2024</p>
+    </div>
+</ng-template>
+
+<app-transactions-sidebar></app-transactions-sidebar>

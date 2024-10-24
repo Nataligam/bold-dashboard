@@ -1,1 +1,171 @@
-/* You can add global styles to this file, and also import other style files */
+@import "primeicons/primeicons.css";
+
+
+
+$blue: #121E6C;
+$red: #EE424E;
+$gray: #606060;
+$light-gray: #F3F3F3;
+$background-gray: #F6F4F9;
+
+body {
+  margin: 0;
+  font-family: 'Montserrat', sans-serif;
+  background-color: $background-gray;
+}
+
+body,
+body .p-component {
+  font-family: 'Montserrat', sans-serif;
+}
+
+
+.p-menubar {
+  background: linear-gradient(90deg, $blue, $red 90%) !important;
+  padding: 1rem 3.5rem;
+  border-radius: 0;
+}
+
+a.p-menuitem-link {
+  color: white;
+}
+
+.custom-table .p-datatable-header {
+  padding: 0;
+  border: none;
+}
+
+.title-table-caption {
+  background: linear-gradient(90deg, $blue, $red 90%) !important;
+  color: white;
+  height: 40px;
+  border-radius: 10px 10px 0 0;
+  display: flex;
+  align-items: center;
+  padding-left: 15px;
+  font-weight: 100;
+}
+
+.p-datatable .p-datatable-thead>tr>th {
+  font-weight: 200;
+  padding: 0.5rem 0.5rem;
+}
+
+.text-blue {
+  color: $blue;
+}
+
+.text-red {
+  color: $red;
+}
+
+.text-gray {
+  color: $gray;
+}
+
+.text-green {
+  color: #81E3B3;
+}
+
+.p-datatable .p-datatable-tbody>tr>td:first-child {
+  border-left: 4px solid transparent;
+}
+
+.p-datatable .p-datatable-tbody>tr:nth-of-type(odd)td:first-child {
+  border-left-color: $blue;
+}
+
+.p-datatable .p-datatable-tbody>tr:nth-of-type(even) td:first-child {
+  border-left-color: $gray;
+}
+
+.button-filter-date-group {
+  padding: 10px;
+  background-color: #f7f6fb;
+  border-radius: 10px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.button-filter-date-group button {
+  border: none;
+  background-color: white;
+  border-radius: 20px;
+  margin: 0 5px;
+  font-size: 16px;
+  cursor: pointer;
+  color: $blue;
+  transition: background-color 0.3s;
+  width: 100%;
+}
+
+.button-filter-date-group p-button.active button {
+  background-color: #d3d3d3;
+}
+
+.button-filter-date-group .p-button:hover {
+  background-color: #e5e5e5;
+}
+
+@media screen and (max-width: 600px) {
+  .button-group {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  button {
+    margin-bottom: 10px;
+    text-align: center;
+  }
+}
+
+.custom-card .p-card-content {
+  padding: 0;
+}
+
+.text-degrade {
+  background: linear-gradient(to right, $blue, $red);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+}
+
+
+.custom-card .p-card-header {
+  border-radius: 10px 10px 0 0;
+  background: linear-gradient(90deg, $blue, $red 90%) !important;
+}
+
+.custom-red-button .p-button {
+  background-color: $red !important; 
+  color: white !important;         
+  border: none !important;           
+}
+
+.custom-red-button .p-button {
+  width: 100%;       
+}
+
+.custom-red-button .p-button:hover {
+  background-color: #c24048 !important;
+}
+
+.p-button-label {
+  font-weight: 500;
+}
+
+
+.custom-sidebar {
+  width: 30rem; 
+}
+
+@media (max-width: 768px) {
+  .custom-sidebar {
+    width: 100vw; 
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  .custom-sidebar {
+    width: 60vw; 
+  }
+}

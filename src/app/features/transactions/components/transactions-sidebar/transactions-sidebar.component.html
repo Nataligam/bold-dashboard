@@ -1,1 +1,55 @@
-<p>transactions-sidebar works!</p>
+<app-sidebar #sidebar [contentTemplate]="contentTemplateDetailSidebar"></app-sidebar>
+<ng-template #contentTemplateDetailSidebar>
+    <div class="flex flex-column text-center">
+        <i class="pi pi-check-circle text-green text-3xl"></i>
+        <p id="amount-element" class="text-3xl text-blue font-semibold">{{dataDetail?.amount | currency}}</p>
+        <small>{{dataDetail?.createdAt | date: 'dd/MM/yyyy - HH:mm:ss'}}</small>
+    </div>
+    <div class="mt-5">
+        <div class="grid">
+            <div class="col-6">
+                <p class="text-gray text-sm">ID transacción Bold</p>
+            </div>
+            <div class="col-6 text-right">
+                <p class="font-semibold">{{dataDetail?.id}}</p>
+            </div>
+        </div>
+        <div class="grid">
+            <div class="col-6">
+                <p class="text-gray text-sm">Deducción Bold</p>
+            </div>
+            <div class="col-6 text-right">
+                <p class="text-red">-{{dataDetail?.deduction ? (dataDetail?.deduction | currency) : '--'}}</p>
+            </div>
+        </div>
+
+        <p-divider />
+        
+        <div class="grid">
+            <div class="col-6">
+                <p class="text-gray text-sm">Método de pago</p>
+            </div>
+            <div class="col-6 text-right flex align-items-center justify-content-end">
+                <div class="flex flex-row align-items-center gap-5">
+                    <img [src]="getPaymentMethodImage(dataDetail?.paymentMethod === 'CARD' ? dataDetail?.franchise : dataDetail?.paymentMethod)"
+                        alt="{{ dataDetail?.paymentMethod }}" width="30">
+                    <span>{{dataDetail?.paymentMethod === 'PSE' ? dataDetail?.paymentMethod : '****' +
+                        dataDetail?.transactionReference }}</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid">
+            <div class="col-6">
+                <p class="text-gray text-sm">Tipo de pago</p>
+            </div>
+            <div class="col-6 flex align-items-center justify-content-end">
+                <div class="flex flex-row gap-2">
+                    <i
+                        [class]="dataDetail?.salesType === 'TERMINAL' ? 'pi pi-credit-card text-blue' : 'pi pi-link text-blue'"></i>
+                    <span class="font-semibold text-sm">{{dataDetail?.salesType === 'TERMINAL' ? 'Datáfono' : 'Link de pagos'}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-template>
