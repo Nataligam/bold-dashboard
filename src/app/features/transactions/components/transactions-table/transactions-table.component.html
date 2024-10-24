@@ -1,1 +1,38 @@
-<p>transactions-table works!</p>
+
+<app-table [titleCaption]="titleCaption" [cols]="cols" [data]="filteredTransactions">
+    <ng-template #statusTemplate let-row>
+        <td>
+            <div class="flex flex-row gap-2">
+                <i [class]="row.salesType === 'TERMINAL' ? 'pi pi-credit-card text-blue' : 'pi pi-link text-blue'"></i>
+                <span class="text-blue font-semibold">{{row.status === 'SUCCESSFUL' ? 'Cobro exitoso' : 'Cobro no
+                    exitoso'}}</span>
+            </div>
+        </td>
+    </ng-template>
+
+    <ng-template #createAtTemplate let-row>
+        <td>
+            {{row.createdAt | date: 'dd/MM/yyyy - HH:mm:ss'}}
+        </td>
+    </ng-template>
+
+    <ng-template #paymentMethodTemplate let-row>
+        <td>
+            <div class="flex flex-row align-items-center gap-5">
+                <img [src]="getPaymentMethodImage(row.paymentMethod === 'CARD' ? row.franchise : row.paymentMethod)"
+                    alt="{{ row.paymentMethod }}" width="30">
+                <span>{{row.paymentMethod === 'PSE' ? row.paymentMethod : '****' + row.transactionReference }}</span>
+            </div>
+        </td>
+    </ng-template>
+
+    <ng-template #amountTemplate let-row>
+        <td>
+            <span class="text-blue font-semibold">{{row.amount | currency }}</span>
+            <div class="flex flex-column" *ngIf="row.deduction">
+                <small>Deducción Bold</small>
+                <small class="text-red">- {{row.deduction | currency}}</small>
+            </div>
+        </td>
+    </ng-template>
+</app-table>

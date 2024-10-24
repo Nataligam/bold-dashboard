@@ -1,1 +1,3 @@
-<p>sidebar works!</p>
+<p-sidebar [(visible)]="sidebarVisible" styleClass="custom-sidebar" position="right">
+    <ng-container *ngIf="contentTemplate" [ngTemplateOutlet]="contentTemplate"></ng-container>
+</p-sidebar>
