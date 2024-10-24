@@ -3,8 +3,9 @@ import { AfterViewInit, Component, Input, OnInit, ViewChild } from '@angular/cor
 import { Column } from 'src/app/core/models/common/column.model';
 import { Transaction } from 'src/app/core/models/transactions/transaction.model';
 import { TableComponent } from 'src/app/shared/components/table/table.component';
-import { getImage } from 'src/app/shared/utils/utilities';
+import { getImage, isSameDay } from 'src/app/shared/utils/utilities';
 import { TransactionsService } from '../../services/transactions.service';
+import { ToastUtil } from 'src/app/shared/utils/toast';
 
 @Component({
   selector: 'app-transactions-table',
@@ -26,7 +27,7 @@ export class TransactionsTableComponent implements OnInit, AfterViewInit {
   @ViewChild('paymentMethodTemplate', { static: true }) paymentMethodTemplate: any;
   @ViewChild('amountTemplate', { static: true }) amountTemplate: any;
 
-  constructor(private transactionService: TransactionsService) {
+  constructor(private transactionService: TransactionsService, private toast: ToastUtil) {
 
   }
 
@@ -48,10 +49,30 @@ export class TransactionsTableComponent implements OnInit, AfterViewInit {
         this.transactions = data.data;
         this.filteredTransactions = this.transactions;
       },
-      error: (error) => {
-        console.error('Error al obtener las transacciones', error);
+      error: () => {
+        this.toast.showToast('error', 'Error', 'Ha ocurrido un error al obtener los datos');
+      },
+      complete: () => {
+        this.getLocalStorageFilters();
       }
     });
+  }
+
+  getLocalStorageFilters() {
+    const savedButtonDateFilter = localStorage.getItem('selectedButton');
+    const savedOptionsMultiselectFilter = localStorage.getItem('selectedOptions');
+    let selectedButton;
+    let selectedOptions;
+
+    if (savedButtonDateFilter) {
+      selectedButton = savedButtonDateFilter;
+    }
+
+    if (savedOptionsMultiselectFilter) {
+      selectedOptions = JSON.parse(savedOptionsMultiselectFilter);
+    }
+
+    this.applyFilters(selectedButton, selectedOptions);
   }
 
   getPaymentMethodImage(paymentMethod: any) {
@@ -59,41 +80,42 @@ export class TransactionsTableComponent implements OnInit, AfterViewInit {
   }
 
   applyFilters(selectedButton: any, selectedOptions: any) {
-    const today = new Date(); 
-    const startOfWeek = new Date(today.setDate(today.getDate() - today.getDay())); 
-    const startOfJune = new Date(today.getFullYear(), 5, 1); 
-    const endOfJune = new Date(today.getFullYear(), 5, 30); 
-  
+    const today = new Date();
+    const startOfWeek = new Date(today.setDate(today.getDate() - today.getDay()));
+    const startOfJune = new Date(today.getFullYear(), 5, 1);
+    const endOfJune = new Date(today.getFullYear(), 5, 30);
+
     this.filteredTransactions = this.transactions.filter(transaction => {
-      const transactionDate = new Date(transaction.createdAt); 
-      
+      const transactionDate = new Date(transaction.createdAt);
+
       let dateFilter = false;
-      
+
       if (selectedButton === 'Hoy') {
-        dateFilter = this.isSameDay(transactionDate, new Date());
+        dateFilter = isSameDay(transactionDate, new Date());
       } else if (selectedButton === 'Esta semana') {
         dateFilter = transactionDate >= startOfWeek && transactionDate <= new Date();
       } else if (selectedButton === 'Junio') {
         dateFilter = transactionDate >= startOfJune && transactionDate <= endOfJune;
       }
-  
+
       let optionsFilter = (
         selectedOptions.length === 0 ||
         selectedOptions.some((option: any) => option.code === 'ALL') ||
         selectedOptions.some((option: any) => option.code === transaction.salesType)
       );
-  
+
       return dateFilter && optionsFilter;
     });
+    this.calculateTotalSales();
   }
 
-  isSameDay(date1: Date, date2: Date): boolean {
-    return date1.getFullYear() === date2.getFullYear() &&
-           date1.getMonth() === date2.getMonth() &&
-           date1.getDate() === date2.getDate();
+  calculateTotalSales() {
+    this.transactionService.updateTotalAmount(this.filteredTransactions);
   }
-  
-  }
+
+
+
+}
 
 
 

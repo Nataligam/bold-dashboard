@@ -80,9 +80,6 @@ a.p-menuitem-link {
 }
 
 .button-filter-date-group {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
   padding: 10px;
   background-color: #f7f6fb;
   border-radius: 10px;
@@ -90,8 +87,6 @@ a.p-menuitem-link {
 }
 
 .button-filter-date-group button {
-  flex: 1;
-  padding: 10px 20px;
   border: none;
   background-color: white;
   border-radius: 20px;
@@ -100,13 +95,14 @@ a.p-menuitem-link {
   cursor: pointer;
   color: $blue;
   transition: background-color 0.3s;
+  width: 100%;
 }
 
-.button-filter-date-group button.active {
+.button-filter-date-group p-button.active button {
   background-color: #d3d3d3;
 }
 
-.button-filter-date-group button:hover {
+.button-filter-date-group .p-button:hover {
   background-color: #e5e5e5;
 }
 
@@ -151,4 +147,25 @@ a.p-menuitem-link {
 
 .custom-red-button .p-button:hover {
   background-color: #c24048 !important;
+}
+
+.p-button-label {
+  font-weight: 500;
+}
+
+
+.custom-sidebar {
+  width: 30rem; 
+}
+
+@media (max-width: 768px) {
+  .custom-sidebar {
+    width: 100vw; 
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  .custom-sidebar {
+    width: 60vw; 
+  }
 }

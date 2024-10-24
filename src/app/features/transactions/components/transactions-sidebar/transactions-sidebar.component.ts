@@ -15,7 +15,7 @@ import { getImage } from 'src/app/shared/utils/utilities';
 })
 export class TransactionsSidebarComponent implements OnInit {
 
-  dataDetail!: Transaction;
+  dataDetail!: Transaction | null;
   isSidebarOpen: boolean = false;
   @ViewChild('sidebar', { static: true }) sidebar: any;
 

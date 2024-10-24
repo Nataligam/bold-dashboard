@@ -7,6 +7,7 @@ import { FormsModule } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
 import { BrowserModule } from '@angular/platform-browser';
 import { TransactionsSidebarComponent } from '../../components/transactions-sidebar/transactions-sidebar.component';
+import { TransactionsService } from '../../services/transactions.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -20,9 +21,13 @@ export class DashboardComponent implements OnInit {
   selectedButton: string = 'Hoy';
   @ViewChild('contentCard', { static: true }) contentCard: any;
   @ViewChild('transactionsTable', { static: true }) transactionsTable: any;
-  amountTotal: string = '0';
+  amountTotal: number = 0;
   options!: any[];
   selectedOptions!: any[];
+
+  constructor(private transactionService: TransactionsService){
+
+  }
 
   ngOnInit() {
     this.options = [
@@ -31,17 +36,23 @@ export class DashboardComponent implements OnInit {
       { name: 'Ver todos', code: 'ALL' },
     ];
 
+    this.transactionService.totalAmount$.subscribe((total: number) => {
+      this.amountTotal = total;  
+    });
+    this.getLocalStorageFilter();
+  }
+  
+  getLocalStorageFilter(){
     const savedButtonDateFilter = localStorage.getItem('selectedButton');
     const savedOptionsMultiselectFilter = localStorage.getItem('selectedOptions');
-
+  
     if (savedButtonDateFilter) {
       this.selectedButton = savedButtonDateFilter;
     }
-
+  
     if (savedOptionsMultiselectFilter) {
       this.selectedOptions = JSON.parse(savedOptionsMultiselectFilter);
-    }
-
+    } 
     this.applyFilters();
   }
 

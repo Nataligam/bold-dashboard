@@ -2,12 +2,17 @@
     <app-info-card class="col-12 md:col-4 lg:col-3" [tooltipText]="'Información'"
         [titleCard]="'Tus ventas de '+selectedButton" [contentTemplate]="contentCard"></app-info-card>
     <div class="col-12 md:col-8 lg:col-9">
-        <div class="button-filter-date-group">
-            <button [class.active]="selectedButton === 'Hoy'" (click)="selectButton('Hoy')">Hoy</button>
-            <button [class.active]="selectedButton === 'Esta semana'" (click)="selectButton('Esta semana')">Esta
-                semana</button>
-            <button [class.active]="selectedButton === 'Junio'" (click)="selectButton('Junio')">Junio</button>
-        </div>
+        <div class="button-filter-date-group grid">
+            <div class="col-12 md:col-4 lg:col-4 flex justify-content-center">
+              <p-button class="w-full font-medium" [ngClass]="{'active': selectedButton === 'Hoy'}" (click)="selectButton('Hoy')" label="Hoy"></p-button>
+            </div>
+            <div class="col-12 md:col-4 lg:col-4 flex justify-content-center">
+              <p-button class="w-full" [ngClass]="{'active': selectedButton === 'Esta semana'}" (click)="selectButton('Esta semana')" label="Esta semana"></p-button>
+            </div>
+            <div class="col-12 md:col-4 lg:col-4 flex justify-content-center">
+              <p-button class="w-full" [ngClass]="{'active': selectedButton === 'Junio'}" (click)="selectButton('Junio')" label="Junio"></p-button>
+            </div>
+          </div>
         <div class="flex justify-content-end mt-3">
             <p-multiSelect [appendTo]="'body'" (onChange)="selectFiltersMultiselect()" [options]="options" [showToggleAll]="false" [showHeader]="false" [filter]="false" [(ngModel)]="selectedOptions" placeholder="Filtrar"
                 optionLabel="name">     

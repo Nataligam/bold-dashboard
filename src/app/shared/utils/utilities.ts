@@ -19,7 +19,7 @@ export const PSE_IMG = '../assets/payment-methods/logo-pse.png';
 export const DEFAULT_IMG_PAYMENT_METHOD = '../assets/payment-methods/logo-default.png';
 
 
-export function  getImage(paymentMethod: any) {
+export const getImage = (paymentMethod: any) => {
     switch (paymentMethod?.toUpperCase()) {
       case VISA:
         return VISA_IMG;
@@ -36,4 +36,10 @@ export function  getImage(paymentMethod: any) {
       default:
         return DEFAULT_IMG_PAYMENT_METHOD;
     }
+  }
+
+  export const isSameDay = (date1: Date, date2: Date): boolean => {
+    return date1.getFullYear() === date2.getFullYear() &&
+      date1.getMonth() === date2.getMonth() &&
+      date1.getDate() === date2.getDate();
   }
