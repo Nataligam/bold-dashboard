@@ -8,6 +8,7 @@ import { Column } from 'src/app/core/models/common/column.model';
 import { Transaction } from 'src/app/core/models/transactions/transaction.model';
 import { CustomFilterPipe } from '../../pipes/custom-filter.pipe';
 import { KEY, ROWS, ROWS_PER_PAGE } from '../../utils/utilities';
+import { RowSelectionService } from '../../services/row-selection.service';
 
 
 @Component({
@@ -29,13 +30,17 @@ export class TableComponent implements OnInit {
   @Input() cols: Column[] = [];
   @ViewChild('dt') dt: Table | undefined;
 
-  constructor() {
+  constructor(private rowSelectionService: RowSelectionService) {
     this.rows = ROWS;
     this.rowsPerPage = ROWS_PER_PAGE;
     this.key = KEY;
   }
 
   ngOnInit() {
+  }
+
+  openDetail(event: any) {
+    this.rowSelectionService.selectRow(event.data, true); 
   }
 
 }

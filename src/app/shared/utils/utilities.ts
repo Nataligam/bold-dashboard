@@ -19,3 +19,21 @@ export const PSE_IMG = '../assets/payment-methods/logo-pse.png';
 export const DEFAULT_IMG_PAYMENT_METHOD = '../assets/payment-methods/logo-default.png';
 
 
+export function  getImage(paymentMethod: any) {
+    switch (paymentMethod?.toUpperCase()) {
+      case VISA:
+        return VISA_IMG;
+      case MASTERCARD:
+        return MASTERCARD_IMG;
+      case NEQUI:
+        return NEQUI_IMG;
+      case BANCOLOMBIA:
+        return BANCOLOMBIA_IMG;
+      case DAVIPLATA:
+        return DAVIPLATA_IMG;
+      case PSE:
+        return PSE_IMG;
+      default:
+        return DEFAULT_IMG_PAYMENT_METHOD;
+    }
+  }

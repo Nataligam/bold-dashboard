@@ -6,12 +6,13 @@ import { MultiSelectModule } from 'primeng/multiselect';
 import { FormsModule } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
 import { BrowserModule } from '@angular/platform-browser';
+import { TransactionsSidebarComponent } from '../../components/transactions-sidebar/transactions-sidebar.component';
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   standalone: true,
-  imports: [CommonModule, InfoCardComponent, TransactionsTableComponent, MultiSelectModule, ButtonModule, FormsModule],
+  imports: [CommonModule, InfoCardComponent, TransactionsTableComponent, MultiSelectModule, ButtonModule, FormsModule, TransactionsSidebarComponent],
   styleUrl: './dashboard.component.scss'
 })
 export class DashboardComponent implements OnInit {

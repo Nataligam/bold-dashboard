@@ -3,7 +3,7 @@ import { AfterViewInit, Component, Input, OnInit, ViewChild } from '@angular/cor
 import { Column } from 'src/app/core/models/common/column.model';
 import { Transaction } from 'src/app/core/models/transactions/transaction.model';
 import { TableComponent } from 'src/app/shared/components/table/table.component';
-import { BANCOLOMBIA, BANCOLOMBIA_IMG, DAVIPLATA, DAVIPLATA_IMG, DEFAULT_IMG_PAYMENT_METHOD, MASTERCARD, MASTERCARD_IMG, NEQUI, NEQUI_IMG, PSE, PSE_IMG, VISA, VISA_IMG } from 'src/app/shared/utils/utilities';
+import { getImage } from 'src/app/shared/utils/utilities';
 import { TransactionsService } from '../../services/transactions.service';
 
 @Component({
@@ -54,23 +54,8 @@ export class TransactionsTableComponent implements OnInit, AfterViewInit {
     });
   }
 
-  getPaymentMethodImage(paymentMethod: string) {
-    switch (paymentMethod.toUpperCase()) {
-      case VISA:
-        return VISA_IMG;
-      case MASTERCARD:
-        return MASTERCARD_IMG;
-      case NEQUI:
-        return NEQUI_IMG;
-      case BANCOLOMBIA:
-        return BANCOLOMBIA_IMG;
-      case DAVIPLATA:
-        return DAVIPLATA_IMG;
-      case PSE:
-        return PSE_IMG;
-      default:
-        return DEFAULT_IMG_PAYMENT_METHOD;
-    }
+  getPaymentMethodImage(paymentMethod: any) {
+    return getImage(paymentMethod);
   }
 
   applyFilters(selectedButton: any, selectedOptions: any) {

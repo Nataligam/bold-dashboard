@@ -1,9 +1,11 @@
 
 <p-table
-    #dt1
-    class="custom-table"
-    [value]="data | customFilter: searchValue"
-    [columns]="cols"
+#dt1
+class="custom-table"
+[value]="data | customFilter: searchValue"
+[columns]="cols"
+(onRowSelect)="openDetail($event)"
+    selectionMode="single"
     dataKey="id"
     [rows]="rows"
     [rowsPerPageOptions]="rowsPerPage"    
@@ -24,7 +26,7 @@
         </tr>
     </ng-template>
     <ng-template pTemplate="body" let-rowData let-columns="columns">
-        <tr>
+        <tr  [pSelectableRow]="rowData">
             <td *ngFor="let col of columns">
                 <ng-container *ngIf="col.isCustom; else defaultTemplate">
                     <ng-container *ngTemplateOutlet="col.templateRef; context: { $implicit: rowData }"></ng-container>             
@@ -42,3 +44,4 @@
         </tr>
     </ng-template>
 </p-table>
+
