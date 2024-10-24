@@ -1,11 +1,11 @@
 import { CommonModule } from '@angular/common';
-import { AfterViewInit, Component, Input, OnInit, ViewChild } from '@angular/core';
+import { AfterContentInit, Component, Input, OnInit, ViewChild } from '@angular/core';
 import { Column } from 'src/app/core/models/common/column.model';
 import { Transaction } from 'src/app/core/models/transactions/transaction.model';
 import { TableComponent } from 'src/app/shared/components/table/table.component';
+import { ToastUtil } from 'src/app/shared/utils/toast';
 import { getImage, isSameDay } from 'src/app/shared/utils/utilities';
 import { TransactionsService } from '../../services/transactions.service';
-import { ToastUtil } from 'src/app/shared/utils/toast';
 
 @Component({
   selector: 'app-transactions-table',
@@ -14,7 +14,7 @@ import { ToastUtil } from 'src/app/shared/utils/toast';
   standalone: true,
   imports: [TableComponent, CommonModule]
 })
-export class TransactionsTableComponent implements OnInit, AfterViewInit {
+export class TransactionsTableComponent implements OnInit, AfterContentInit {
 
   @Input() titleCaption!: string;
   cols: Column[] = [];
@@ -35,7 +35,7 @@ export class TransactionsTableComponent implements OnInit, AfterViewInit {
     this.getTransactions();
   }
 
-  ngAfterViewInit() {
+  ngAfterContentInit() {
     this.cols = [{ field: 'status', header: 'Transacción', templateRef: this.statusTemplate, isCustom: true },
     { field: 'createdAt', header: 'Fecha y hora', templateRef: this.createAtTemplate, isCustom: true },
     { field: 'paymentMethod', header: 'Método de pago', templateRef: this.paymentMethodTemplate, isCustom: true },

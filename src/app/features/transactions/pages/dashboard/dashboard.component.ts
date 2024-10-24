@@ -1,12 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { InfoCardComponent } from 'src/app/shared/components/info-card/info-card.component';
-import { TransactionsTableComponent } from '../../components/transactions-table/transactions-table.component';
-import { MultiSelectModule } from 'primeng/multiselect';
 import { FormsModule } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
-import { BrowserModule } from '@angular/platform-browser';
+import { MultiSelectModule } from 'primeng/multiselect';
+import { InfoCardComponent } from 'src/app/shared/components/info-card/info-card.component';
 import { TransactionsSidebarComponent } from '../../components/transactions-sidebar/transactions-sidebar.component';
+import { TransactionsTableComponent } from '../../components/transactions-table/transactions-table.component';
 import { TransactionsService } from '../../services/transactions.service';
 
 @Component({
@@ -49,9 +48,13 @@ export class DashboardComponent implements OnInit {
     if (savedButtonDateFilter) {
       this.selectedButton = savedButtonDateFilter;
     }
-  
     if (savedOptionsMultiselectFilter) {
-      this.selectedOptions = JSON.parse(savedOptionsMultiselectFilter);
+      try {
+        this.selectedOptions = JSON.parse(savedOptionsMultiselectFilter);
+      } catch (error) {        
+        this.selectedOptions = []; 
+      }
+      
     } 
     this.applyFilters();
   }
@@ -60,7 +63,6 @@ export class DashboardComponent implements OnInit {
     this.selectedButton = type;
     localStorage.setItem('selectedButton', type); 
     this.applyFilters();
-  
   }
 
   selectFiltersMultiselect() {

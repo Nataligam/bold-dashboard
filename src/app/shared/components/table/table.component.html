@@ -15,7 +15,7 @@ class="custom-table"
         <div class="title-table-caption">{{titleCaption}}</div>
             <span class="p-input-icon-left w-full">
                 <i class="pi pi-search"></i>
-                <input pInputText class="border-noround w-full" type="text" [(ngModel)]="searchValue" placeholder="Buscar" />
+                <input id="search-field" pInputText class="border-noround w-full" type="text" [(ngModel)]="searchValue" placeholder="Buscar" />
             </span>     
     </ng-template>
     <ng-template pTemplate="header" let-columns>

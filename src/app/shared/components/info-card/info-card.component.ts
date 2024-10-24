@@ -13,7 +13,7 @@ import { Tooltip, TooltipModule } from 'primeng/tooltip';
 export class InfoCardComponent implements OnInit {
 
   @Input() titleCard: string = '';
-  @Input() contentTemplate!: TemplateRef<any>;  
+  @Input() contentTemplate!: TemplateRef<any> | null;  
   @Input() tooltipText: string = '';
 
   ngOnInit(){

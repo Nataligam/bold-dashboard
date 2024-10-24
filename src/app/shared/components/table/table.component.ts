@@ -21,7 +21,7 @@ import { RowSelectionService } from '../../services/row-selection.service';
 })
 export class TableComponent implements OnInit {
 
-  @Input() data!: Transaction[];
+  @Input() data!: any[];
   rows: number;
   rowsPerPage: Array<number>;
   key: string;

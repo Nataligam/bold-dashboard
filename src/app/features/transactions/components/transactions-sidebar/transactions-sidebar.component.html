@@ -2,7 +2,7 @@
 <ng-template #contentTemplateDetailSidebar>
     <div class="flex flex-column text-center">
         <i class="pi pi-check-circle text-green text-3xl"></i>
-        <p class="text-3xl text-blue font-semibold">{{dataDetail?.amount | currency}}</p>
+        <p id="amount-element" class="text-3xl text-blue font-semibold">{{dataDetail?.amount | currency}}</p>
         <small>{{dataDetail?.createdAt | date: 'dd/MM/yyyy - HH:mm:ss'}}</small>
     </div>
     <div class="mt-5">

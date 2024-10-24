@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, Input, TemplateRef } from '@angular/core';
 import { SidebarModule } from 'primeng/sidebar';
 
 @Component({
@@ -12,7 +12,7 @@ import { SidebarModule } from 'primeng/sidebar';
 export class SidebarComponent {
 
   sidebarVisible: boolean = false;
-  @Input() contentTemplate: any;
+  @Input() contentTemplate!: TemplateRef<any> | null;  
 
   show(){
     this.sidebarVisible = true;
